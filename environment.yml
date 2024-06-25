@@ -1,0 +1,11 @@
+name: oer-rag
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - conda-forge::ffmpeg
+  - pip
+  - pip:
+    - -r requirements.txt
+    - ipykernel
+    - black

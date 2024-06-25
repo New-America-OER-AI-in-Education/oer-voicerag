@@ -1,0 +1,10 @@
+general:
+  cachedir: <HERE>/data/flexbooks_RAG_encoding
+
+extraction:
+  folder: <HERE>/data/FlexBooks
+
+encoding: {}
+
+tagging:
+  auto_tag: True
