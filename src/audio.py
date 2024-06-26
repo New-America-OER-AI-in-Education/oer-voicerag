@@ -12,9 +12,10 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 CHUNK = 1024
-RECORD_SECONDS = 0.5
-WAIT_CHUNKS = 4
+RECORD_SECONDS = 0.2
+WAIT_CHUNKS = 10
 WAVE_OUTPUT_FILENAME = "output.wav"
+
 
 def load_stream(data, sample_size):
     with BytesIO() as DATA_BYTES:
@@ -28,6 +29,7 @@ def load_stream(data, sample_size):
             signal = spf.readframes(-1)
             signal = np.frombuffer(signal, np.int16)
     return signal
+
 
 def listen_for_input(verbose=0):
     audio = pyaudio.PyAudio()
@@ -62,7 +64,7 @@ def listen_for_input(verbose=0):
         if started:
             frames.extend(chunk_data)
         if verbose > 0:
-            print(len(chunk_data))    
+            print(len(chunk_data))
             print(len(frames))
             print(chunki)
 
@@ -76,17 +78,16 @@ def listen_for_input(verbose=0):
     stream.close()
     audio.terminate()
 
+
 def play_text(text, model="tts-1", voice="alloy"):
     client = OpenAI()
     response = client.audio.speech.create(
-        model=model,
-        voice=voice,
-        input=text,
-        response_format="mp3"
+        model=model, voice=voice, input=text, response_format="mp3"
     )
     response.write_to_file("speech.mp3")
     resp = AudioSegment.from_mp3("speech.mp3")
     play(resp)
+
 
 def transcribe_input():
     listen_for_input()

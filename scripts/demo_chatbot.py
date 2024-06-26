@@ -25,11 +25,12 @@ TTS_MODEL = "tts-1"
 # can be any of:
 # "tts-1", "tts-1-hd"
 
-CHATBOT_MODEL = "gpt-3.5-turbo-0125"
+CHATBOT_MODEL = "gpt-4o"
 # can be any of:
 # "gpt-4o", "gpt-4-turbo", "gpt-4-0125-preview", "gpt-4-1106-preview", "gpt-3.5-turbo-0125"
 
-MODE = "text"
+MODE = "voice"
+# can be any of "voice" or "text"
 
 async def create_chatcontroller(caller=CHATBOT_MODEL):
     with open(ROOT / "contexts/context_searcher.txt") as f:
@@ -50,11 +51,12 @@ async def main(voice=VOICE, mode=MODE):
             prompt = input("Prompt: ")
         print(prompt)
         if mode == "voice":
-            play_text(f"You said: {prompt}. Is that correct? Say 'correct' or 'incorrect'", voice=voice)
+            play_text(f"You said: {prompt}. Is that correct?", voice=voice)
             confirm = transcribe_input()
-            if not confirm.lower().startswith("correct"):
+            if not confirm.lower().startswith("yes"):
                 play_text(f"OK, please try again", voice=voice)
                 continue
+        play_text("got it", voice=voice)
         if prompt.lower().startswith("exit"):
             break
         _, output = await controller.achat(prompt, max_tokens=1000)
