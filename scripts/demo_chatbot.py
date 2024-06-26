@@ -42,10 +42,13 @@ async def create_chatcontroller(caller=CHATBOT_MODEL):
 
 
 async def main(voice=VOICE, mode=MODE):
+    first = True
     controller, datastore = await create_chatcontroller(caller=CHATBOT_MODEL)
     while True:
         if mode == "voice":
-            play_text("Awaiting your input", voice=voice)
+            if first:
+                play_text("Awaiting your input", voice=voice)
+                first = False
             prompt = transcribe_input()
         else:
             prompt = input("Prompt: ")
@@ -54,7 +57,7 @@ async def main(voice=VOICE, mode=MODE):
             play_text(f"You said: {prompt}. Is that correct?", voice=voice)
             confirm = transcribe_input()
             if not confirm.lower().startswith("yes"):
-                play_text(f"OK, please try again", voice=voice)
+                play_text(f"OK, please try again. Awaiting your input", voice=voice)
                 continue
         play_text("got it", voice=voice)
         if prompt.lower().startswith("exit"):
@@ -63,7 +66,7 @@ async def main(voice=VOICE, mode=MODE):
         print(controller.recent_tool_calls)
         print(output.Message)
         if mode == "voice":
-            play_text(output.Message, voice=voice)
+            play_text(f"{output.Message}.\n\nAwaiting your input", voice=voice)
             
     await datastore.client.connection_pool.disconnect()
 
