@@ -25,7 +25,6 @@ You can use whatever content you like from OER Commons. For example there is a l
 - LLM embeddings model
     - Embeddings are a numerical representation of text inputs that respect semantic relationships between inputs.
     - Text from the catalogue and text from the user input are both encoded as embeddings for semantic search
-    - We have included a working script for processing the `Flexbooks` folder of data here: [encode_document_catalogue](scripts/encode_document_catalogue.py)
 
 - LLM generator model
     - For example gpt-4, gpt-3.5, claude-sonnet, ...
@@ -40,6 +39,10 @@ You can use whatever content you like from OER Commons. For example there is a l
     - Basic conversational agent
     - Tool use
     - User interface
+
+We have included a working script for processing the `Flexbooks` folder of data here: [encode_document_catalogue](scripts/encode_document_catalogue.py). This extracts text from documents, chunks the text, encodes chunks as embeddings, and performs automated tagging of document chunks.
+
+
 
 # Components of voice activation
 
