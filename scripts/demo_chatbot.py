@@ -59,7 +59,7 @@ async def main(voice=VOICE, mode=MODE):
             if not confirm.lower().startswith("yes"):
                 play_text(f"OK, please try again. Awaiting your input", voice=voice)
                 continue
-        play_text("got it", voice=voice)
+            play_text("got it", voice=voice)
         if prompt.lower().startswith("exit"):
             break
         _, output = await controller.achat(prompt, max_tokens=1000)
