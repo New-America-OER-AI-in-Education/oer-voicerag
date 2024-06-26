@@ -1,8 +1,8 @@
 general:
-  cachedir: <HERE>/data/flexbooks_RAG_encoding
+  cachedir: ../data/flexbooks_RAG_encoding
 
 extraction:
-  folder: <HERE>/data/FlexBooks
+  folder: ../data/FlexBooks
 
 encoding: {}
 
