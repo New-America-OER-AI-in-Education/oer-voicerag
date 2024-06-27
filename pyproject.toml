@@ -14,7 +14,7 @@ version = "0.1.0"
 requires-python = ">=3.10, <=3.12"
 dependencies = [
     "fabdata-llm @ git+https://github.com/AI-for-Education/fabdata-llm.git@v0.18.1",
-    "fabdata-llm-retrieval @ git+https://github.com/AI-for-Education/fabdata-llm-retrieval.git@v0.7.3",
+    "fabdata-llm-retrieval @ git+https://github.com/AI-for-Education/fabdata-llm-retrieval.git@v0.7.4",
     "numpy == 1.26.*",
     "pandas == 2.*",
     "lxml == 4.9.*",
@@ -25,4 +25,5 @@ dependencies = [
     "pyaudio",
     "pydub",
     "python-dotenv",
+    "streamlit == 1.3.*",
 ]
