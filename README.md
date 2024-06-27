@@ -42,6 +42,7 @@ You can use whatever content you like from OER Commons. For example there is a l
 
 We have included a working script for processing the `Flexbooks` folder of data here: [encode_document_catalogue](scripts/encode_document_catalogue.py). This extracts text from documents, chunks the text, encodes chunks as embeddings, and performs automated tagging of document chunks.
 
+We have aso hosted a Redis database server and included a working script for upserting the encoded documents here: [upsert_document_catalogue](scripts/upsert_document_catalogue.py)
 
 
 # Components of voice activation
