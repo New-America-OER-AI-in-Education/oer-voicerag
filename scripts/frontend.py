@@ -1,8 +1,20 @@
 import streamlit as st
 import time
+import asyncio
+
+from chat import create_chatcontroller
+
+@st.cache_()
+def first_run():
+  loop = asyncio.new_event_loop()
+  asyncio.set_event_loop(loop)
+  st.session_state["loop"] = loop
+  controller, _ = loop.run_until_complete(create_chatcontroller())
+  return controller
+
+controller = first_run()
 
 col1, col2, col3 = st.columns([10, 1, 1], vertical_alignment="center")
-
 
 with col1:
    st.image('images/logo.png')
@@ -30,10 +42,11 @@ if query:
       st.write(query)
     with st.status("Working on it..."):
       st.write("Searching for data...")
-      time.sleep(2)
+      loop = st.session_state["loop"]
+      inmsg, outmsg = loop.run_until_complete(controller.achat(query))
       st.write("Found data!")
       time.sleep(1)
     with st.chat_message("assistant"):
-      st.write("Marvelous Magnets: Exploring the Power and Attraction of Magnets")
-      st.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non lobortis nisl. In venenatis finibus mauris, et pellentesque nunc egestas id. Integer hendrerit egestas maximus. Ut sed elementum velit. Aenean pulvinar nisl vitae pellentesque condimentum. Donec nec iaculis magna. Donec ornare nisl sed justo euismod, in sagittis quam efficitur.")
+      st.write(outmsg.Message)
+      # st.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non lobortis nisl. In venenatis finibus mauris, et pellentesque nunc egestas id. Integer hendrerit egestas maximus. Ut sed elementum velit. Aenean pulvinar nisl vitae pellentesque condimentum. Donec nec iaculis magna. Donec ornare nisl sed justo euismod, in sagittis quam efficitur.")
 

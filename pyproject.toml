@@ -25,5 +25,5 @@ dependencies = [
     "pyaudio",
     "pydub",
     "python-dotenv",
-    "streamlit == 1.3.*",
+    "streamlit == 1.36.*",
 ]
