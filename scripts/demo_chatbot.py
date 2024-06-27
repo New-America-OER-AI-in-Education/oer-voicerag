@@ -12,7 +12,10 @@ from fdllm.chat import ChatController
 from fdllmret.plugin import retrieval_plugin
 from fdllmret.helpers.encoding import DocsetEncoding
 
-from audio import play_text, transcribe_input
+MODE = "text"
+# can be any of "voice" or "text"
+if MODE == "voice":
+    from audio import play_text, transcribe_input
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
@@ -29,8 +32,6 @@ CHATBOT_MODEL = "gpt-4o"
 # can be any of:
 # "gpt-4o", "gpt-4-turbo", "gpt-4-0125-preview", "gpt-4-1106-preview", "gpt-3.5-turbo-0125"
 
-MODE = "voice"
-# can be any of "voice" or "text"
 
 async def create_chatcontroller(caller=CHATBOT_MODEL):
     with open(ROOT / "contexts/context_searcher.txt") as f:

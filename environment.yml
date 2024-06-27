@@ -1,9 +1,9 @@
-name: oer-rag
+name: oer-voicerag
 channels:
   - defaults
 dependencies:
   - python=3.11
-  - conda-forge::ffmpeg
+  - conda-forge::portaudio
   - pip
   - pip:
     - -r requirements.txt
