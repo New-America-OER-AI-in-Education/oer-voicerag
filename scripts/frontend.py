@@ -4,7 +4,7 @@ import asyncio
 
 from chat import create_chatcontroller
 
-@st.cache_()
+@st.cache_resource()
 def first_run():
   loop = asyncio.new_event_loop()
   asyncio.set_event_loop(loop)
@@ -29,13 +29,23 @@ with st.chat_message("assistant"):
     with st.container(height=200):
       st.header("Hello 👋 I'm Reo. I'm your tutoring buddy. You can use voice or text.")
 
-left, right = st.columns([1, 11], vertical_alignment="center")
+# left, right = st.columns([1, 11], vertical_alignment="center")
 
-with left:
-    st.image('images/mic-icon.png')
+# with left:
+#     st.image('images/mic-icon.png')
 
-with right:
-    query = st.chat_input("How can I help you today?", key="query")
+# with right:
+#     query = st.chat_input("How can I help you today?", key="query")
+
+left, center, right = st.columns([5, 3, 5], vertical_alignment="center")
+
+with center: 
+  st.image('images/mic-icon.png')
+
+with center: 
+  st.write("Swipe up for text input")
+
+query = st.chat_input("How can I help you today?", key="query")
 
 if query:
     with st.chat_message("user"):
